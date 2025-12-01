@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fajar Faisal | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---- keep your existing variables and core styles but tighten spacing for responsiveness ---- */
+        :root {
+            --black: #000;
+            --white: #fff;
+            --pink: #ff7eb5;
+            --purple: #b399ff;
+            --light-gray: #cfcfcf;
+            --accent-1: #ff7eb5;
+            --accent-2: #b399ff;
+            --accent-3: #7afcff;
+            --accent-4: #ff65a3;
+            --accent-5: #feff9c;
+        }
+
+        * {
+            box-sizing: border-box;
+            cursor: none;
+        }
+
+        /* Override cursor:none for clickable images */
+        .modal-trigger {
+            cursor: pointer !important;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 126, 181, 0.7);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(179, 153, 255, 0.4);
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.4s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 18px 0;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 12px 0;
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            padding: 5px 0;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transition: width 0.4s ease;
+        }
+
+        .logo:hover::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: 90px;
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        /* PROFILE PICTURE FIX - Adjusted container */
+        .profile-frame {
+            width: 240px;
+            height: 360px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 3px solid var(--white);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.06);
+            position: relative;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-frame:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 15px 40px rgba(255, 126, 181, 0.3);
+        }
+
+        /* PROFILE PICTURE FIX - Adjusted image styling */
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 25%;
+            /* Adjusted to show more of the face */
+            transition: transform 0.5s ease;
+        }
+
+        .profile-frame:hover img {
+            transform: scale(1.05);
+        }
+
+        .intro-text h1 {
+            font-size: 2.6rem;
+            margin: 18px 0 6px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 5s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .intro-text h2 {
+            font-size: 1.05rem;
+            color: var(--light-gray);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        .intro-text p {
+            max-width: 720px;
+            line-height: 1.6;
+            color: #e9e9e9;
+        }
+
+        .profile-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 22px;
+        }
+
+        .profile-btn {
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            text-decoration: none;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .profile-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .profile-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 181, 0.4);
+            border-color: var(--accent-1);
+        }
+
+        .profile-btn:hover::before {
+            left: 100%;
+        }
+
+        .about {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 40px;
+            margin: 28px auto;
+            max-width: 1000px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s ease;
+        }
+
+        .about.visible::before {
+            transform: scaleX(1);
+        }
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skill-category {
+            min-width: 240px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 126, 181, 0.1), rgba(179, 153, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-category:hover::before {
+            opacity: 1;
+        }
+
+        .skill-category h3 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-category ul {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Projects grid and cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 126, 181, 0.05), rgba(179, 153, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-card img:hover {
+            transform: scale(1.02);
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            margin: 12px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-description {
+            color: var(--light-gray);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            margin: 6px 6px 0 0;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tech-tag:hover {
+            background: rgba(255, 126, 181, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Certifications gallery */
+        .cert-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .cert-card {
+            width: 260px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 126, 181, 0.05), rgba(179, 153, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cert-card:hover::before {
+            opacity: 1;
+        }
+
+        .cert-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cert-card img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: var(--accent-1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 181, 0.4);
+        }
+
+        /* Floating animation for background elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 126, 181, 0.1) 0%, rgba(179, 153, 255, 0.05) 70%, transparent 100%);
+            z-index: -1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(10px, -15px) rotate(5deg);
+            }
+
+            50% {
+                transform: translate(-5px, -10px) rotate(-5deg);
+            }
+
+            75% {
+                transform: translate(-10px, 5px) rotate(3deg);
+            }
+        }
+
+        /* Responsive tweaks */
+        @media (max-width:900px) {
+            .intro-text h1 {
+                font-size: 2rem;
+            }
+
+            .profile-frame {
+                width: 200px;
+                height: 300px;
+            }
+
+            .project-card img {
+                height: 160px;
+            }
+        }
+
+        @media (max-width:520px) {
+            .nav-links {
+                display: none;
+            }
+
+            .intro-text p {
+                padding: 0 10px;
+            }
+
+            .cert-card {
+                width: 100%;
+            }
+        }
+
+        /* small animations: fade-in and hover lift */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* reduced-motion for accessibility */
+        @media (prefers-reduced-motion:reduce) {
+
+            .fade-in,
+            .project-card,
+            .cursor,
+            .cursor-follower {
+                transition: none;
+                animation: none;
+            }
+        }
+
+        /* Modal styles - PROPERLY SIZED */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 40px 20px;
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* FIX: allow the modal to never crop the image */
+            max-width: 95vw;
+            max-height: 95vh;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-image {
+            /* FIX: ensures the WHOLE image fits inside the popup at all times */
+            max-width: 95vw;
+            max-height: 95vh;
+
+            width: auto;
+            height: auto;
+
+            object-fit: contain;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.2s ease;
+            z-index: 101;
+        }
+
+        .close-modal:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* Responsive modal adjustments */
+        @media (max-width: 768px) {
+            .modal {
+                padding: 20px 10px;
+            }
+
+            .modal-content {
+                max-width: 95vw;
+                max-height: 95vh;
+            }
+
+            .close-modal {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.3rem;
+            }
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating Background Elements -->
+    <div class="floating-element" style="width: 150px; height: 150px; top: 10%; left: 5%;"></div>
+    <div class="floating-element" style="width: 100px; height: 100px; top: 70%; left: 80%;"></div>
+    <div class="floating-element" style="width: 120px; height: 120px; top: 40%; left: 90%;"></div>
+    <div class="floating-element" style="width: 80px; height: 80px; top: 20%; left: 70%;"></div>
+    <div class="floating-element" style="width: 200px; height: 200px; top: 60%; left: 10%;"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a class="logo" href="#home">Fajar Faisal</a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#certifications">Certifications</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero container">
+            <div class="profile-frame">
+                <!-- Use your existing headshot file path from repo. Replace if different -->
+                <img src="images/fajar_headshot_pfp.png" alt="Fajar headshot">
+            </div>
+
+            <div class="intro-text">
+                <h1>Fajar Faisal</h1>
+                <h2>Recent Business & Technology Management Graduate</h2>
+                <p>I bridge business problems and technical solutions. I enjoy building analytics products that help
+                    teams make better decisions.</p>
+                <div class="profile-buttons">
+                    <a href="https://www.linkedin.com/in/fajar-faisal/" class="profile-btn" target="_blank"><i
+                            class="fab fa-linkedin-in"></i>&nbsp;LinkedIn</a>
+                    <a href="FajarFaisal_Resume.pdf" class="profile-btn" download><i
+                            class="far fa-file-alt"></i>&nbsp;Resume</a>
+                    <a class="profile-btn" id="emailBtn"><i class="far fa-envelope"></i>&nbsp;Email</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about container fade-in">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">I am a Technology Business Management graduate focused on analytics,
+                dashboarding, and data-driven problem solving. I'm actively seeking analytic roles where I can
+                contribute to delivery and learn on the job.</div>
+        </section>
+
+        <section id="skills" class="container fade-in">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Analytical Tools</h3>
+                    <ul>
+                        <li>Power BI</li>
+                        <li>Tableau</li>
+                        <li>Excel (PivotTables / Power Query)</li>
+                        <li>Google Data Studio</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <ul>
+                        <li>Python (Pandas)</li>
+                        <li>R (tidyverse)</li>
+                        <li>SQL</li>
+                        <li>HTML / CSS / JavaScript</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="container fade-in">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <!-- Capstone -->
+                <article class="project-card">
+
+                    <h3 class="project-title">SmartCone — Capstone (Software Analysis and UX documentation)</h3>
+                    <p class="project-description">Identified UX issues within the ZIM platform and created onboarding
+                        documentation and training videos adopted by users.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">ZIM</span><span class="tech-tag">Excel</span><span
+                            class="tech-tag">Documentation</span><span class="tech-tag">Onboarding</span>
+                    </div>
+                </article>
+
+                <!-- COVID R Dashboard -->
+                <article class="project-card">
+                    <img src="images/COVID19_Dashboard.png" alt="COVID dashboard screenshot" class="modal-trigger">
+
+
+                    <h3 class="project-title">COVID-19 Analytics Dashboard (R)</h3>
+                    <p class="project-description">End-to-end workflow in R: cleaning, EDA, trend analysis and
+                        interactive R Markdown dashboard.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">R</span><span class="tech-tag">Excel</span><span
+                            class="tech-tag">tidyverse</span><span class="tech-tag">ggplot2</span>
+                    </div>
+                </article>
+
+                <!-- IBM HR -->
+                <article class="project-card">
+                    <img src="images/IBM_Dashbaords.png" alt="IBM HR analytics visual" class="modal-trigger">
+
+                    <h3 class="project-title">IBM HR Analytics</h3>
+                    <p class="project-description">Python-based analysis with 7 targeted visuals covering attrition,
+                        compensation and tenure trends.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span><span class="tech-tag">Excel</span><span
+                            class="tech-tag">Pandas</span><span class="tech-tag">Seaborn</span>
+                    </div>
+                </article>
+
+                <!-- Enrollment Analysis -->
+                <article class="project-card">
+                    <img src="images/BI_EnrollmentDashboard.jpg" alt="Enrollment Power BI screenshot"
+                        class="modal-trigger">
+
+                    <h3 class="project-title">Enrollment Analysis (Power BI)</h3>
+                    <p class="project-description">Examined 5-year enrollment trends and surfaced key retention risk
+                        indicators.</p>
+                    <div class="project-tech"><span class="tech-tag">Power BI</span><span
+                            class="tech-tag">Excel</span><span class="tech-tag">DAX</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="certifications" class="container fade-in">
+            <h2 class="section-title">Certifications</h2>
+
+            <!-- TATA Certification-->
+            <div class="cert-grid">
+                <div class="cert-card">
+                    <img src="images/Fajar_Forage_TATA_Certification.png" alt="Tata certificate (via Forage)"
+                        class="modal-trigger">
+
+                    <div style="margin-top:10px">Tata GenAI Data Analytics — Completed Oct 22, 2025</div>
+                </div>
+
+                <!-- BRITISH AIRWAYS Certification-->
+                <div class="cert-grid">
+                    <div class="cert-card">
+                        <img src="images/Fajar_Forage_BritishAirways_Certification.png"
+                            alt="British Airways certificate (via Forage)" class="modal-trigger">
+                        <div style="margin-top:10px">British Airways Data Sciences — Completed Oct 22, 2025</div>
+                    </div>
+
+                    <!-- ELECTRONIC  ARTS (EA) Certification-->
+                    <div class="cert-grid">
+                        <div class="cert-card">
+                            <img src="images/Fajar_Forage_EA_Certification.png"
+                                alt="Electronic Arts certificate (via Froage)" class="modal-trigger">
+                            <div style="margin-top:10px">Electronic Arts (EA) Software Engineering — Completed Oct 23,
+                                2025</div>
+                        </div>
+
+                        <!-- DELOITTE Certification-->
+                        <div class="cert-grid">
+                            <div class="cert-card">
+                                <img src="images/Fajar_Forage_Deliotte_Certification.png"
+                                    alt="Deloitte certificate (via Forage)" class="modal-trigger">
+                                <div style="margin-top:10px">Deloitte Cyber Security Analyst — Completed Oct 23, 2025
+                                </div>
+                            </div>
+                            <!-- JP.Morgan Certification-->
+                            <div class="cert-grid">
+                                <div class="cert-card">
+                                    <img src="images/Fajar_Forage_JPMC_Certification.png"
+                                        alt="JP.Morgan certificate (via Forage)" class="modal-trigger">
+                                    <div style="margin-top:10px">JPMorgan Chase & Co. Quantitave Research — Completed
+                                        Oct 25, 2025</div>
+                                </div>
+
+                                <!-- Siemens Certification-->
+                                <div class="cert-grid">
+                                    <div class="cert-card">
+                                        <img src="images/Fajar_Forage_Siemens_Certification.png"
+                                            alt="Siemens certificate (via Forage)" class="modal-trigger">
+                                        <div style="margin-top:10px">Siemens Project Management — Completed Oct 28, 2025
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+        </section>
+
+    </main>
+
+    <!-- Modal for images -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <img class="modal-image" src="" alt="Enlarged view">
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div style="display:flex;justify-content:center;gap:18px;margin-bottom:18px">
+                <a href="https://www.linkedin.com/in/fajar-faisal/" class="social-btn" target="_blank"><i
+                        class="fab fa-linkedin-in"></i></a>
+                <a href="Resume.pdf" class="social-btn" download><i class="far fa-file-alt"></i></a>
+            </div>
+            <div style="text-align:center;color:var(--light-gray)">© 2025 Fajar Faisal. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        // Interactive cursor effects
+        document.querySelectorAll('a, button, .modal-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(1.5)';
+                cursorFollower.style.transform = 'scale(1.3)';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursorFollower.style.transform = 'scale(1)';
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Email button
+        function openEmailDraft() {
+            const email = 'fajar_faisal@outlook.com';
+            const subject = 'Inquiry from portfolio';
+            const body = 'Hi Fajar,%0D%0A%0D%0AI saw your portfolio and would like to connect.';
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        }
+        document.getElementById('emailBtn')?.addEventListener('click', openEmailDraft);
+
+        // Enhanced scroll reveal for .fade-in elements with staggered timing
+        function onScrollReveal() {
+            document.querySelectorAll('.fade-in').forEach((el, index) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 120) {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, index * 150);
+                }
+            });
+        }
+        window.addEventListener('scroll', onScrollReveal);
+        window.addEventListener('load', onScrollReveal);
+
+        // Improve image loading: lazy load
+        document.querySelectorAll('img').forEach(img => { img.loading = 'lazy' })
+
+        // Mobile-friendly: smooth anchor scrolling with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const id = a.getAttribute('href');
+                if (!id || id === "#") return;
+                const el = document.querySelector(id);
+                if (el) {
+                    const y = el.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top: y, behavior: 'smooth' })
+                }
+            })
+        })
+
+        // Accessibility: prefer-reduced-motion respected
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.style.scrollBehavior = 'auto'
+        }
+
+        // Modal functionality for Projects and Certifications
+        const modal = document.getElementById('imageModal');
+        const modalImage = modal.querySelector('.modal-image');
+        const closeModal = modal.querySelector('.close-modal');
+
+        // Function to attach modal functionality to images
+        function attachModalListeners() {
+            document.querySelectorAll('.modal-trigger').forEach(img => {
+                // Remove any existing listeners by cloning
+                const newImg = img.cloneNode(true);
+                img.parentNode.replaceChild(newImg, img);
+
+                // Add click event
+                newImg.addEventListener('click', () => {
+                    modalImage.src = newImg.src;
+                    modalImage.alt = newImg.alt;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+        }
+
+        // Initialize modal listeners on page load
+        attachModalListeners();
+
+        // Close modal when clicking the close button
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Add floating elements dynamically
+        function createFloatingElements() {
+            const container = document.body;
+            for (let i = 0; i < 8; i++) {
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+
+                // Random size between 50px and 200px
+                const size = Math.floor(Math.random() * 150) + 50;
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+
+                // Random position
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.left = `${Math.random() * 100}%`;
+
+                // Random animation delay and duration
+                element.style.animationDelay = `${Math.random() * 10}s`;
+                element.style.animationDuration = `${15 + Math.random() * 10}s`;
+
+                container.appendChild(element);
+            }
+        }
+
+        // Initialize floating elements
+        createFloatingElements();
+    </script>
+</body>
+
+</html>
