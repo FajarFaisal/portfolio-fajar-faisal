@@ -364,6 +364,57 @@
             z-index: 1;
         }
 
+
+/*Extra - Currricular */
+        .extracurrricular-container {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .extracurrricular-category {
+            min-width: 240px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .extracurrricular-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 126, 181, 0.1), rgba(179, 153, 255, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .extracurrricular-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .extracurrricular-category:hover::before {
+            opacity: 1;
+        }
+
+        .extracurrricular-category h3 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .extracurrricular-category ul {
+            position: relative;
+            z-index: 1;
+        }
+
+        
         /* Experience Section Styles */
         .experience-container {
             display: flex;
@@ -1019,7 +1070,7 @@
 
  <!-- NEW EXTRACURICULAR SECTION -->
         <section id="extra" class="container fade-in">
-            <h2 class="section-title">Extracurriculars</h2>
+            <h2 class="section-title">Extra Curriculars</h2>
             <div class="extracurricular-container">
 
                  <!-- Mental Health Ammbassador of Enactus Canada Club @OTU -->
@@ -1046,7 +1097,7 @@
                 <!-- VP Communications of WIB Club @OTU -->
                 <div class="extracurricular-card">
                     <div class="extracurricular-header">
-                        <div class="extracurricular-title">
+                        <div class="experience-title">
                             <h3>Vice President of Communications - Woman in Business Club</h3>
                             <h4>Ontario Tech Univeristy</h4>
                         </div>
@@ -1065,8 +1116,8 @@
 
                    <!-- VP of CS Club @OTU -->
                 <div class="extracurricular-card">
-                    <div class="experience-header">
-                        <div class="extracurricular-title">
+                    <div class="extracurricular-header">
+                        <div class="experience-title">
                             <h3>Computer Science Club - Vice President </h3>
                             <h4>Ontario Tech Univeristy</h4>
                         </div>
